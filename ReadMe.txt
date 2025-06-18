@@ -24,7 +24,16 @@ USAGE INSTRUCTIONS
        python3 generate_icons.py <your-image.png>
 
    Example:
-       python3 generate_icons.py MyImage.png
+       python3 generate_icons.py your_image.png
+    
+
+USAGE
+-----
+    python3 generate_icons.py your_image.png [--no-crop]
+
+Arguments:
+    your_image.png   Source image (preferably square, high resolution 512x512 or larger)
+    --no-crop        Optional. Disables auto-cropping to a square aspect ratio.
 
 3. The script will:
     ✓ Create a "favicons/" directory (if not already present)
