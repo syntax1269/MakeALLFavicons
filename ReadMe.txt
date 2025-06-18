@@ -12,66 +12,77 @@ REQUIREMENTS
 - Python 3.7 or newer
 - [Pillow] Python Imaging Library for image resizing
 
-Install Pillow using pip (Python package manager):
+To install Pillow:
     python3 -m pip install --upgrade Pillow
 
 -----------------------------------------------------------
 USAGE INSTRUCTIONS
 -----------------------------------------------------------
-1. Place your source image in the same folder as the script
-   (Recommended: Transparent PNG, at least 512x512 pixels)
+1. Place your source image (PNG format recommended, 512x512 or larger) in the same folder.
 
-2. Update this line(9) in the script of your image:
-       input_image_path = "<SOURCE FILENAME HERE>"
+2. Run the script using:
+       python3 generate_icons.py <your-image.png>
 
-3. Run the script using:
-       python3 MakeFavicons.py
+   Example:
+       python3 generate_icons.py MyImage.png
 
-4. The script will:
-    - Create a "favicons" directory
-    - Generate all icon sizes in PNG and ICO formats
-    - Generate a Safari-compatible pinned tab SVG
-    - Generate a PWA-compatible manifest.json
-    - Gzip every output file (leaving the originals intact)
-
-5. Upload the contents of the "favicons" folder to your web root
-   and include the provided <head> HTML snippet in your website's <head> section.
+3. The script will:
+    ✓ Create a "favicons/" directory (if not already present)
+    ✓ Resize and generate all required icon sizes (PNG and ICO)
+    ✓ Create a Safari pinned-tab icon (SVG)
+    ✓ Create a PWA manifest.json
+    ✓ Gzip all generated files (*.gz) without deleting originals
 
 -----------------------------------------------------------
 FEATURES
 -----------------------------------------------------------
-✓ Supports all major favicon and app icon sizes:
-    - Browser tabs, iOS home screens, Android launchers, Windows tiles, Chrome apps
-
-✓ Generates:
-    - .png files (16x16 to 512x512)
-    - .ico file (multi-resolution)
-    - .svg Safari-pinned tab icon
-    - manifest.json (with Android-compatible icons)
-    - Gzipped versions of all assets (.gz)
-
-✓ Includes pre-generated HTML <head> snippet for fast integration
+✓ PNG icons for:
+   - Standard browser tabs (16x16, 32x32, 48x48)
+   - iOS devices (72x72 to 180x180)
+   - Android/Chrome (192x192, 512x512)
+   - Windows tiles (70x70 to 310x310)
+   - Chrome Web Store (128x128)
+✓ Multi-resolution favicon.ico (16–256 px)
+✓ manifest.json for PWA apps
+✓ Safari pinned-tab icon (SVG with base64 PNG)
+✓ Gzip compression (level 9) of all output files
+✓ Source image is supplied as a command-line argument
 
 -----------------------------------------------------------
-FILE STRUCTURE
+EXAMPLE OUTPUT
 -----------------------------------------------------------
 /favicons/
-    favicon-16x16.png
-    favicon-32x32.png
-    ...
-    apple-touch-icon-180x180.png
-    safari-pinned-tab.svg
-    manifest.json
-    favicon.ico
-    (plus .gz versions of each)
+├── android-chrome-192x192.png
+├── apple-touch-icon-120x120.png
+├── favicon-16x16.png
+├── favicon.ico
+├── safari-pinned-tab.svg
+├── manifest.json
+├── favicon-16x16.png.gz
+├── manifest.json.gz
+└── ... (and more .png/.gz files)
 
 -----------------------------------------------------------
-SUPPORT & TIPS
+HTML HEAD SNIPPET
 -----------------------------------------------------------
-- Ensure all files are served with appropriate MIME types and
-  enable gzip encoding on your web server to use .gz versions.
-- Always include <link rel="manifest"> and <meta name="theme-color"> for PWA support.
-- Apple requires exact icon sizes, so do not resize dynamically via CSS or HTML.
+Include this in your <head> section:
+
+<link rel="icon" type="image/png" sizes="16x16" href="favicons/favicon-16x16.png">
+<link rel="icon" type="image/png" sizes="32x32" href="favicons/favicon-32x32.png">
+<link rel="shortcut icon" href="favicons/favicon.ico">
+<link rel="apple-touch-icon" sizes="180x180" href="favicons/apple-touch-icon-180x180.png">
+<link rel="manifest" href="favicons/manifest.json">
+<link rel="mask-icon" href="favicons/safari-pinned-tab.svg" color="#000000">
+<meta name="theme-color" content="#ffffff">
+<meta name="msapplication-TileColor" content="#ffffff">
+<meta name="msapplication-TileImage" content="favicons/mstile-150x150.png">
+
+-----------------------------------------------------------
+SERVER RECOMMENDATIONS
+-----------------------------------------------------------
+- Serve .gz files using proper Content-Encoding headers if supported
+- Use long cache expiration (e.g. max-age=31536000) for icons
+- Ensure MIME types are correct (e.g., .svg = image/svg+xml, .json = application/json)
 
 -----------------------------------------------------------
 LICENSE
