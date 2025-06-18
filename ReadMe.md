@@ -1,5 +1,3 @@
----
-
 # 🧰 Favicon Generator Script
 
 This Python script automates the creation of a complete set of favicon and application icons from a single high-resolution image. It supports virtually all modern platforms including:
