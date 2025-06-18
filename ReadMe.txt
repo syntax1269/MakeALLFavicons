@@ -25,7 +25,7 @@ USAGE INSTRUCTIONS
        input_image_path = "<SOURCE FILENAME HERE>"
 
 3. Run the script using:
-       python3 generate_icons.py
+       python3 MakeFavicons.py
 
 4. The script will:
     - Create a "favicons" directory
