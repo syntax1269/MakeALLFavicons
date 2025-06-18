@@ -1,12 +1,23 @@
-from PIL import Image
+import sys
 import os
+from PIL import Image
 import base64
 import json
 import gzip
 import shutil
 
-# === CONFIGURATION ===
-input_image_path = "<SOURCE FILENAME HERE>"
+# === GET INPUT FILE FROM COMMAND LINE ===
+if len(sys.argv) != 2:
+    print("Usage: python3 generate_icons.py <source_image.png>")
+    sys.exit(1)
+
+input_image_path = sys.argv[1]
+
+if not os.path.isfile(input_image_path):
+    print(f"Error: '{input_image_path}' not found.")
+    sys.exit(1)
+
+
 output_dir = "favicons"
 os.makedirs(output_dir, exist_ok=True)
 
