@@ -162,7 +162,7 @@ Include the following tags in your `<head>` section:
 your_project/
 ├── MakeFavicons.py
 ├── my_logo.png
-└── favicons/
+└── favicons-my_logo/
     ├── favicon-16x16.png
     ├── favicon-32x32.png
     ├── ...
