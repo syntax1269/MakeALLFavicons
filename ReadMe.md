@@ -152,7 +152,7 @@ Include the following tags in your `<head>` section:
 
 ```
 your_project/
-├── generate_icons.py
+├── MakeFavicons.py
 ├── my_logo.png
 └── favicons/
     ├── favicon-16x16.png
