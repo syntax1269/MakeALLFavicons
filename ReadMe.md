@@ -17,16 +17,19 @@ This Python script automates the creation of a complete set of favicon and appli
 * Outputs in `.png`, `.ico`, and `.svg` formats
 * Auto-generates a `manifest.json` for web apps
 * Automatically **crops** to square (optional)
-* Gzips all output files using **maximum compression** (`gzip -9`)
-* Organizes everything into a `favicons/` folder
+* Gzips output files like `favicon.ico`, `safari-pinned-tab.svg`, and `manifest.json` (e.g., `favicon.ico.gz`) using **maximum compression** (`gzip -9`)
+* Dynamically creates the output directory name by taking the base name of the source_image_path and prepending `favicons-` to it. (e.g., `favicons-my_logo` if the input was `my_logo.png`) relative to where the script is run. This directory will be populated with the generated files.
 * Supports command-line flags for automation
 
 ---
 
-## ⚙️ Requirements
+## ⚙️ Dependencies
 
-* Python **3.6+**
-* [Pillow](https://pypi.org/project/Pillow/) (PIL fork)
+*   **Python 3**: The script is written for Python 3.
+*   **Pillow**: The Python Imaging Library (Fork) is required for all image processing tasks.
+    *   You can install Pillow using pip: `pip install Pillow`
+    *   For optimal quantization quality (using `LIBIMAGEQUANT`), ensure `libimagequant` is available when Pillow is installed. On macOS with Homebrew, this is typically handled by `brew install pillow` (which installs `libimagequant` as a dependency).
+
 
 ### Installation:
 
@@ -48,7 +51,12 @@ python3 generate_icons.py my_logo.png
 
 ### Optional Flags:
 
-* `--no-crop` → Disables automatic square cropping
+* *   `--no-crop`: 
+    *   By default, the script makes icons square by padding the source image while maintaining its aspect ratio. 
+    *   Use this flag to disable this behavior. Icons will then be resized to fit within the target dimensions, potentially resulting in non-square icons if the source image is not square. The padding will still be transparent.
+*   `--highquality`:
+    *   By default, PNG icons are quantized to 256 colors to reduce file size.
+    *   Use this flag to save PNGs as full RGBA (32-bit color with alpha) without any color quantization. This results in larger file sizes but preserves all original colors and transparency levels perfectly.
 
 ### Example:
 
