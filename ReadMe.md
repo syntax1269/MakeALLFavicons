@@ -51,7 +51,7 @@ python3 generate_icons.py my_logo.png
 
 ### Optional Flags:
 
-* *   `--no-crop`: 
+*   `--no-crop`: 
     *   By default, the script makes icons square by padding the source image while maintaining its aspect ratio. 
     *   Use this flag to disable this behavior. Icons will then be resized to fit within the target dimensions, potentially resulting in non-square icons if the source image is not square. The padding will still be transparent.
 *   `--highquality`:
